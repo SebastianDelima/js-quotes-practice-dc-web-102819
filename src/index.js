@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded',() => {
   getQuotes()
-  
+
 })
 
 function getQuotes(){
@@ -19,6 +19,7 @@ function displayQuotes(quote){
     let authorFooter     = document.createElement('footer')
     let likeButton       = document.createElement('button')
     let deleteButton     = document.createElement('button')
+    let subButton        = document.querySelector('.btn-primary')
 
     blockquote.classList.add('blockquote')
     quoteText.classList.add('mb-0')
@@ -31,8 +32,30 @@ function displayQuotes(quote){
     likeButton.innerText   = 'Like'
     deleteButton.innerText = 'delete'
 
+    likeButton.addEventListener('click', addLike)
+    subButton.addEventListener('click', createQuote)
+
     quoteList.appendChild(quoteLi)
     quoteLi.appendChild(blockquote)
     blockquote.append(quoteText, authorFooter, likeButton, deleteButton)
 
+}
+
+
+function createQuote(){
+
+    event.preventDefault()
+    let quoteText = event.target.parentElement.querySelector('#new-quote').value
+    let authorText = event.target.parentElement.querySelector('#author').value
+    let newQuote = Object.assign({quote: quoteText, author: authorText})
+    event.target.parentElement.reset()
+    
+
+    displayQuotes(newQuote)
+   event.preventDefault()
+}
+
+function addLike(event){
+
+    debugger
 }
